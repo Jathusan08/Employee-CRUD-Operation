@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- One thing is important when using Thymeleaf, you need to setup the XML namespace -->
+<html xmlns:th="http://www.thymeleaf.org"> <!--  By Setting up this namespace , it will allow to use Thymeleaf expressions in our page.-->
+<head>
+<head>
+<meta charset="UTF-8">
+<title>Update Employee</title>
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+<div class="container"> <!-- Bootstrap CSS style -->
+
+<h1> Employee Directory</h1>
+<hr>
+
+<p class="h4 mb-4"></p>
+
+<!-- Create HTML form for update employee -->
+
+<form action="#" th:action="@{/employees/updateEmployee}"
+	   th:object="${updateEmployee}" method="POST">
+	   
+	   <!--  Add hidden form field to handle update -->
+	    <input type="hidden" th:field="*{id}" />
+	   
+	   <!-- First Name input -->
+	   <input type="text" th:field="*{firstName}" placeholder ="First Name"
+	   class="form-control mb-4 col-4">
+	   
+	   <!-- Last Name input -->
+	   <input type="text" th:field="*{lastName}" placeholder ="Last Name"
+	   class="form-control mb-4 col-4">
+	   
+	   <!-- Email  input -->
+	   <input type="text" th:field="*{email}" placeholder ="Email Address"
+	   class="form-control mb-4 col-4">
+	   
+	   <button type="submit" class="btn btn-info col-2">Update</button>
+	   
+	   </form>
+	   
+	   
+	   <!-- add link back to the employee page -->
+	   <hr>
+	   <a th:href="@{/employees/list}">Back to the Employee List</a>
+
+</div>
+
+</body>
+</html>

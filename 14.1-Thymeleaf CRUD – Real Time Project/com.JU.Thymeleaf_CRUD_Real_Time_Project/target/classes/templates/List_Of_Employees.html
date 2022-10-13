@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- One thing is important when using Thymeleaf, you need to setup the XML namespace -->
+<html xmlns:th="http://www.thymeleaf.org"> <!--  By Setting up this namespace , it will allow to use Thymeleaf expressions in our page.-->
+<head>
+<meta charset="UTF-8">
+<title>Employees List</title>
+
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<body>
+
+<div class="container"> <!-- Bootstrap CSS style -->
+
+<h1>Employee Directory</h1>
+<hr>
+
+
+
+<!--  Add Employee Button -->
+<a th:href="@{/employees/ShowEmployeeForm}"class="btn btn-primary btn-rounded"> Add Employee</a> <!-- we're direting to anotehr view template page
+														for to add employee. we setup the request mapping
+														in the controller which will  direct to that view
+														page -->
+
+<!-- '@' symbol is reference context path of your application root -->														
+<!-- 'class="btn btn-primary btn-rounded" ' which is from bootstrap  -->	
+														
+
+<hr>
+													
+
+<!-- <table border="1"> -->
+<table class="table table-bordered table-striped"> <!-- Bootstrap CSS style -->
+
+<!-- Build HTML table based on employees -->
+
+<thead class="table table-bordered table-dark"> <!-- set up table head --> <!-- Bootstrap CSS style -->
+ <tr>
+ <th>Id</th> <!-- table heading -->
+ <th>First Name</th> <!-- table heading -->
+  <th>Last Name</th> <!-- table heading -->
+  <th>Email</th> <!-- table heading -->
+  <th>Action</th> <!-- table heading -->
+  </tr>
+  </thead>
+  
+  <tbody>
+  <!-- Add code to loop over employees -->
+  
+  <tr th:each="tempEmployee : ${EmployeeList}">
+  
+  <!--  th:each is used to loop over the list of employees' -->
+  <!-- 'tempEmployee' is loop parameter that we use to go through -->
+  <!-- ${EmployeeList} is the attribute name that we declared in the controller class -->
+  
+  <td th:text="${tempEmployee.id}" />
+    <td th:text="${tempEmployee.firstName}" />
+      <td th:text="${tempEmployee.lastName}" />
+   <td th:text="${tempEmployee.email}" />
+   
+   <td>
+   
+   <!-- adding update button link for each employee -->
+   <a th:href="@{/employees/UpdateEmployeeForm(employeeId=${tempEmployee.id})}" 
+   class="btn btn-info btn-sm">
+   Update
+   </a>
+   
+      <!-- adding delete button link for each employee -->
+   <a th:href="@{/employees/DeleteEmployee(employeeId=${tempEmployee.id})}" 
+   class="btn btn-danger btn-sm"
+   onclick="if(!(confirm('Are you sure you want to delete this employee?'))) return false"> <!--  Javascript code -->
+   Delete
+   </a>
+   
+   </td>
+   
+   </tr>
+ </tbody>
+</table>
+</div>
+</body>
+</html>
